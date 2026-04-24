@@ -18,23 +18,42 @@ Node *node(int value, Node *left, Node *right) {
 /* Basic Problems */
 
 int size(Node *node) { 
-  /* TODO */
-  return 0;
+  if (node == NULL) return 0;
+   if(!node->marked)
+   {
+    node->marked = true;
+    int leftsize = size(node->left);
+    int rightsize = size(node->right);
+    return 1 + leftsize + rightsize;
+   }
+   return 0;
 }
 
 
 void unmark(Node *node) { 
-  /* TODO */
+  if (node == NULL) return;
+  if(node->marked)
+  {
+    node->marked = false;
+    unmark(node->left);
+    unmark(node->right);
+    
+  }
+  
 }
 
 bool path_from(Node *node1, Node *node2) {
-  /* TODO */
+  if((node1==NULL) || (node2==NULL)) return false;
+  unmark(node1);
+  unmark(node2);
+  int _ = size(node1);
+  if(node2->marked) return true;
   return false;
 }
 
 bool cyclic(Node *node) { 
-  /* TODO */
-  return false;
+  if(node==NULL) return false;
+  return (path_from(node->left,node) || path_from(node->right,node));
 } 
 
 
