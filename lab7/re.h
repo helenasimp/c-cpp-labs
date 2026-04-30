@@ -16,6 +16,9 @@ struct re {
 typedef struct arena *arena_t;
 struct arena {
   /* TODO */
+  int size;
+  int current;
+  Regexp *ptrs;
 };
 
 arena_t create_arena(int size);
