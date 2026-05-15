@@ -30,6 +30,7 @@ void free_expr(expr_t e) {
     switch (e->type) { 
     case LIT:
       free(e);
+      break;
     case PLUS:
     case TIMES: {
       free_expr(e->data.args.fst);
@@ -67,6 +68,7 @@ void print_expr(expr_t e) {
       printf("+");
       print_expr(e->data.args.snd);
       printf(")");
+      break;
     case TIMES: {
       printf("(");
       print_expr(e->data.args.fst);
